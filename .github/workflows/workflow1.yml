@@ -1,7 +1,7 @@
 name: learn-github-actions
 on: [push]
 jobs:
-  check-bats-version:
+  workflow-1:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'A review from octo-team was requested- From workflow-1'
