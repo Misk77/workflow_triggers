@@ -1,8 +1,8 @@
 name: workflow-2
 on: [merge]
 jobs:
+needs: learn-github-actions
   check-bats-version:
-  needs: learn-github-actions
     runs-on: ubuntu-latest
     steps:
       - run: echo 'A review from octo-team was requested- From workflow-2'
