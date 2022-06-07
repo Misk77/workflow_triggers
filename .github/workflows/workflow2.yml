@@ -1,5 +1,6 @@
 name: workflow-2
-on: [review]
+pull_request:
+    types: [review_requested]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
