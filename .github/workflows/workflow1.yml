@@ -1,5 +1,5 @@
 name: learn-github-actions
-on: [push]
+on: create
 jobs:
   workflow-1:
     runs-on: ubuntu-latest
