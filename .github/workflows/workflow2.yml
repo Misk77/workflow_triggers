@@ -1,7 +1,7 @@
 name: workflow-2
 on:
-  pull_request:
-    types: [review_requested]
+  push:
+   branch: main
 jobs:
   workflow-2:
     runs-on: ubuntu-latest
