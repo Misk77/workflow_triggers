@@ -1,5 +1,5 @@
 name: workflow-2
-on: [merge]
+on: [review]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
