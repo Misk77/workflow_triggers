@@ -1,7 +1,6 @@
 name: workflow-2
 on: [merge]
 jobs:
-needs: learn-github-actions
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
