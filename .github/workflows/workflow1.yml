@@ -1,8 +1,12 @@
-on:
-  pull_request:
-   # types: [review_requested]
+name: learn-github-actions
+on: [push]
 jobs:
-  specific_review_requested:
+  check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'A review from octo-team was requested- From workflow-1'
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
