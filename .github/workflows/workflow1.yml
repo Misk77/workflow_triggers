@@ -1,5 +1,7 @@
 name: learn-github-actions
-on: create
+on:
+   pull_request:
+    types: [review_requested]
 jobs:
   workflow-1:
     runs-on: ubuntu-latest
