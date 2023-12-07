@@ -1,4 +1,4 @@
-name: learn-github-actions-workflow1
+name: Workflow_01
 on:
    pull_request:
     branches:

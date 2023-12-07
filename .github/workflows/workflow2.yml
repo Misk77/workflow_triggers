@@ -1,8 +1,7 @@
-name: workflow-2
+name: Workflow_02
 on:
   workflow_run:
-    workflows:
-      - "learn-github-actions-workflow1"
+    workflows: ["Workflow_01"]
     types:
       - completed 
 jobs:
