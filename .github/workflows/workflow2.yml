@@ -4,6 +4,7 @@ on:
     workflows: [learn-github-actions-workflow1]
     types:
       - completed
+    branches: [main]
 jobs:
   on-success:
     runs-on: ubuntu-22.04
