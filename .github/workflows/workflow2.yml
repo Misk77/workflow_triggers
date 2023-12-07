@@ -2,10 +2,9 @@ name: workflow-2
 on:
   workflow_run:
     workflows:
-      - "workflow-1"
+      - "learn-github-actions-workflow1"
     types:
-      - completed
-    branches: [main]
+      - completed 
 jobs:
   on-success:
     runs-on: ubuntu-22.04
