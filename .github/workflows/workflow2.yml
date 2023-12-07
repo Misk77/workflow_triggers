@@ -2,7 +2,7 @@ name: workflow-2
 on:
   workflow_run:
     workflows:
-      - "learn-github-actions-workflow1"
+      - "workflow-1"
     types:
       - completed
     branches: [main]
