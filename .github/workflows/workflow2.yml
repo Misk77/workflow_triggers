@@ -3,10 +3,10 @@ on:
   pull_request:
     branches:
       - main
-  # workflow_run:
-  #   workflows: ["Workflow_01"]
-  #   types:
-  #     - completed 
+  workflow_run:
+    workflows: ["Workflow_01"]
+    types:
+      - completed 
 jobs:
   on-success:
     runs-on: ubuntu-22.04
