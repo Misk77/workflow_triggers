@@ -1,10 +1,10 @@
 name: Workflow_01
 on:
    pull_request:
-    branches:
-      - main
+     branches:
+       - main
 jobs:
   workflow-1:
     runs-on: ubuntu-22.04
     steps:
-      - run: echo 'A review was requested- From workflow-1'
+      - run: echo 'A review was requested From workflow-1'

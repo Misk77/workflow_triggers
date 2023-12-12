@@ -1,9 +1,12 @@
 name: Workflow_02
 on:
-  workflow_run:
-    workflows: ["Workflow_01"]
-    types:
-      - completed 
+  pull_request:
+    branches:
+      - main
+  # workflow_run:
+  #   workflows: ["Workflow_01"]
+  #   types:
+  #     - completed 
 jobs:
   on-success:
     runs-on: ubuntu-22.04
