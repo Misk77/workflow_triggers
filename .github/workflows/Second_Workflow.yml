@@ -3,7 +3,7 @@ name: Second Workflow
 on:
   workflow_run:
     workflows:
-      - workflow_01
+      - First-Workflow
     types: 
       - completed
 
