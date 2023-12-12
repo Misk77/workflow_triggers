@@ -3,6 +3,7 @@ name: Preflight
 
 on:
   pull_request:
+  push:
     branches:
       - main
  
@@ -11,4 +12,4 @@ jobs:
     name: Preflight Step
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hej, nu kör Second"
+      - run: echo "Hej, nu startar vi Second workflow"

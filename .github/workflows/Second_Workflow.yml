@@ -13,4 +13,4 @@ jobs:
     name: Test Step
     runs-on: ubuntu-latest
     steps:
-      - run: env2
+      - run: echo "nu kör vi second workflow"
