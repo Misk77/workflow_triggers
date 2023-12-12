@@ -1,23 +1,20 @@
-name: Workflow_02
-on:
-  pull_request:
-    branches:
-      - main
-  workflow_run:
-    workflows: ["Workflow_01"]
-    types:
-      - completed 
-jobs:
-  test-1:
-    runs-on: ubuntu-22.04
-   
-    steps:
-      - run: echo 'The triggering workflow passed'
+name: Second Workflow
 
-  on-failure:
+on:
+  workflow_run:
+    workflows: ["workflow_01"]
+    types: [completed]
+
+jobs:
+  second_job:
     runs-on: ubuntu-22.04
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-      - run: echo 'The triggering workflow failed'
-  
-   
+      - name: Check the status of the first workflow
+        run: |
+          echo "The first workflow run concluded with status: $(github.event.workflow_run.conclusion)"
+
+      - name: Deploy the application
+        if: github.event.workflow_run.conclusion == 'success'
+        run: |
+          echo "The first workflow run was successful, so I will deploy the application."
+
