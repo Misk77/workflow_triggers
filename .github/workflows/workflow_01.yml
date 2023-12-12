@@ -1,0 +1,14 @@
+---
+name: Preflight
+
+on:
+  pull_request:
+    branches:
+      - main
+ 
+jobs:
+  preflight-job:
+    name: Preflight Step
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hej, nu kör Second"

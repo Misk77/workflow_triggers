@@ -1,9 +1,0 @@
-name: learn-github-actions
-on:
-   pull_request:
-    types: [review_requested]
-jobs:
-  workflow-1:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'A review from octo-team was requested- From workflow-1'
