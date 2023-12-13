@@ -2,15 +2,15 @@
 name: Test
 
 on:
-  workflow_run:
-    workflows:
-      - Preflight
-    types:
-      - completed
+ workflow_run:
+    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml"]
+    types: [completed]
 
 jobs:
   test-job:
     name: Test Step
     runs-on: ubuntu-latest
     steps:
-      - run: echo "nu kör vi second workflow"
+      - run: |
+          echo "Nu har alla filer körts, så vi avslutar med nu med detta echo"
+          echo "Slack notification.."
