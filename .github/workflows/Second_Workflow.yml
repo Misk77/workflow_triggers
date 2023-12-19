@@ -1,16 +1,16 @@
 ---
-name: Test
+name: Second_Workflow
 
 on:
  workflow_run:
-    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml"]
+    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml"]
     types: [completed]
 
 jobs:
-  test-job:
-    name: Test Step
+  Second_Workflow-job:
+    name: Second_Workflow Step
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Nu har alla filer körts, så vi avslutar med nu med detta echo"
-          echo "Slack notification.."
+          echo "Nu körs Second_Workflow"
+          echo ".."
