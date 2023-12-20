@@ -2,9 +2,7 @@
 name: Second_Workflow
 
 on:
- workflow_run:
-    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml"]
-    types: [completed]
+  - pull_request
 
 jobs:
   Second_Workflow-job:

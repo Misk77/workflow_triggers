@@ -1,7 +1,10 @@
+---
+name: Send custom JSON data to Slack workflow
+
 on:
-  pull_request:
-    branches:
-      - master
+ workflow_run:
+    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml"]
+    types: [completed]
 jobs:
   new_push_job:
     runs-on: ubuntu-latest
