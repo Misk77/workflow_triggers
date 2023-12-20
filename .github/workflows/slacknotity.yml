@@ -3,32 +3,38 @@ name: Send custom JSON data to Slack workflow
 
 on:
  workflow_run:
-    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml"]
+    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml", "skipped_workflow_sim.yml"]
     types: [completed]
 jobs:
+  verify_workflow_started:
+   runs-on: ubuntu-latest
+   steps:
+      - name: Check for failed workflows step
+        run: |
+          echo "Send slack notity step"
+
   new_push_job:
     runs-on: ubuntu-latest
-    name: New push to repo
     steps:
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        channel-id: C038JK97W1G
-        payload: |
-          {
-            "text": "@Misk for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
-            "blocks": [
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          channel-id: C038JK97W1G
+          payload: |
             {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": "@Misk for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+              "text": "@Misk for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+              "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "@Misk for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                }
               }
-            }
-          ] 
-          }
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+            ] 
+            } 
+        env:
+             SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+             SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
+             SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
