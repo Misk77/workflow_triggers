@@ -5,6 +5,7 @@ on:
  workflow_run:
     workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml", "skipped_workflow_sim.yml"]
     types: [completed]
+
 jobs:
   verify_workflow_started:
    runs-on: ubuntu-latest

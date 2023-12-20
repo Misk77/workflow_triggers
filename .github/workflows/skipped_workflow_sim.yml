@@ -1,0 +1,13 @@
+name: Skipped workflow Verification
+
+on:
+  - pull_request
+
+jobs:
+  atg-checksum-verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for failed workflows
+        run: |
+          echo "This workflow is intentionally skipped."
+          exit 1  # Set the exit code to 0 to skip the workflow
