@@ -1,4 +1,4 @@
-name: ATG Checksum Verification
+name: kalle Checksum Verification
 
 on:
  - pull_request 
