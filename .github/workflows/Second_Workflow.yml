@@ -13,4 +13,4 @@ jobs:
     steps:
       - run: |
           echo "Nu körs Second_Workflow"
-          echo ".."
+          echo "..."
