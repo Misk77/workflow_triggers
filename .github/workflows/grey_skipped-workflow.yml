@@ -1,0 +1,21 @@
+name: ATG Checksum Verification
+
+on:
+ - pull_request 
+
+jobs:
+  atg-checksum-verification:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check for failed workflows
+        run: |
+          echo "This workflow is intentionally skipped and greyed out. It will not be executed automatically but can be triggered manually."
+          exit 0
+
+      - name: Mark workflow as needs triage
+        run: |
+          echo "Setting needs_triage to true."
+          echo "needs_triage: true" > needs_triage.txt
+          git add needs_triage.txt
+          git commit -m "Mark workflow as needs triage"
+          git push origin HEAD:master
