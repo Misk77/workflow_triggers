@@ -10,4 +10,4 @@ jobs:
       - name: Check for failed workflows
         run: |
           echo "This workflow is intentionally skipped."
-          exit 0  # Set the exit code to 0 to skip the workflow
+          
