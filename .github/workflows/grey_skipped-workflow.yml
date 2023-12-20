@@ -16,6 +16,4 @@ jobs:
         run: |
           echo "Setting needs_triage to true."
           echo "needs_triage: true" > needs_triage.txt
-          git add needs_triage.txt
-          git commit -m "Mark workflow as needs triage"
-          git push origin HEAD:master
+ 
