@@ -4,7 +4,7 @@ on:
  - pull_request 
 
 jobs:
-  atg-checksum-verification:
+  kalle-checksum-verification:
     runs-on: ubuntu-22.04
     steps:
       - name: Check for failed workflows
