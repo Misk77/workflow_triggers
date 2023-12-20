@@ -1,4 +1,4 @@
-name: Conditional Workflow
+name: greyed out workflows
 
 on:
   push:
