@@ -13,14 +13,18 @@ jobs:
       - name: Check for failed workflows
         run: |
           failed_workflows=false
-          for workflow in workflow_runs {
-            if (workflow.status != 'success') {
+          skipped_workflows=[]
+          for workflow_run in workflow_runs {
+            if (workflow_run.status != 'success') {
               failed_workflows=true
-              break
+            }
+            else if (workflow_run.status == 'skipped') {
+              skipped_workflows.append(workflow_run.id)
             }
           }
+
           if (!failed_workflows) {
-            echo "All workflows completed successfully, sending notification to Slack"
+            echo "All workflows completed successfully (excluding skipped workflows), sending notification to Slack"
 
             - name: Send custom JSON data to Slack workflow
               id: slack
@@ -28,22 +32,24 @@ jobs:
               with:
                 channel-id: C038JK97W1G
                 payload: |
-                {
-                  "text": "@Michel workflow_triggers PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "@Michel workflow_triggers PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                  {
+                    "text": "@Michel workflow_triggers PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+                    "blocks": [
+                      {
+                        "type": "section",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "@Michel workflow_triggers PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                        }
                       }
-                    }
-                  ]
-                }
+                    ]
+                  }
+
               env:
                 SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
                 SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
           }
           else {
-            echo "One or more workflows failed. Not sending notification to Slack"
+            echo "One or more workflows failed (excluding skipped workflows). Not sending notification to Slack"
           }
+      
