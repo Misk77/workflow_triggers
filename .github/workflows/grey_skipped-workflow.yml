@@ -27,13 +27,15 @@ jobs:
 
   notify-on-status:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'skipped' }}
+    if: always()
     steps:
-      - name: Notify on Success or Skipped
-        run: |
-          echo "The kalle-checksum-verification step conclusion was: ${github.event.workflow_run.conclusion}"
+      - name: "Plan faild send failure notification"
+        if: ${{ steps.step-status.outputs.status }} != 'success'
+        uses: slackapi/slack-github-action@v1.23.0
 
- 
+      - name: "Plan success send success notification"
+        if: ${{ steps.step-status.outputs.status }} == 'success'
+        uses: slackapi/slack-github-action@v1.23.0
 
   notify-on-failure:
     needs: kalle-checksum-verification
