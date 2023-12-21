@@ -21,7 +21,19 @@ jobs:
     if: ${{ needs.kalle-checksum-verification.outputs.step-status == 'success' }}
     steps:
       - name: Notify on Success
-        run: echo "The kalle-checksum-verification step was successful. Notify accordingly."
+        run: |
+          echo "The kalle-checksum-verification step was successful. Notify accordingly."
+          exit 0
+
+  notify-on-status:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'skipped' }}
+    steps:
+      - name: Notify on Success or Skipped
+        run: |
+          echo "The kalle-checksum-verification step conclusion was: ${github.event.workflow_run.conclusion}"
+
+ 
 
   notify-on-failure:
     needs: kalle-checksum-verification
