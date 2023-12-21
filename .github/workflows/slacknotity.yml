@@ -9,7 +9,7 @@ on:
 
 jobs:
   check_and_notify:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: need to get the branch
         uses: actions/checkout@v4
