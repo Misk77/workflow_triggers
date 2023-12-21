@@ -1,0 +1,14 @@
+---
+name: PR - Second_Workflow
+
+on:
+  - pull_request
+
+jobs:
+  Second_Workflow-job:
+    name: Second_Workflow Step
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Nu körs Second_Workflow"
+          echo "..."

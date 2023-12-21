@@ -1,0 +1,13 @@
+name: PR - Skipped workflow Verification
+
+on:
+  - pull_request
+
+jobs:
+  This-workflow-is-intentionally-skipped-verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for failed workflows
+        run: |
+          echo "This workflow is intentionally skipped."
+          exit 0

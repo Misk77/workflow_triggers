@@ -1,0 +1,12 @@
+---
+name: PR - log alarm forwarder
+
+on:
+  - pull_request
+ 
+jobs:
+  log-alarm-forwarder-job:
+    name: log-alarm-forwarder.yaml Step
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hej, nu startar vi log-alarm-forwarder.yaml"

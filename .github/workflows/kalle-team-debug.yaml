@@ -1,0 +1,12 @@
+---
+name: PR - kalle team debug
+
+on:
+  - pull_request
+ 
+jobs:
+  kalle-team-debug-job:
+    name: kalle-team-debug.yaml Step
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hej, nu startar vi kalle-team-debug.yaml"

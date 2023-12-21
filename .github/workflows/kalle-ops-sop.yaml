@@ -1,0 +1,12 @@
+---
+name: PR - kalle ops sop
+
+on:
+  - pull_request
+ 
+jobs:
+  kalle-ops-sop-job:
+    name: kalle-ops-sop Step
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hej, nu startar vi kalle-ops-sop.yaml"

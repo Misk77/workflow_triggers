@@ -1,0 +1,12 @@
+---
+name: PR - workflow_01
+
+on:
+  - pull_request
+ 
+jobs:
+  preflight-job:
+    name: workflow_01 Step
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hej, nu kör vi workflow_01"

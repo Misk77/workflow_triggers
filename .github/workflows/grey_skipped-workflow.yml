@@ -1,0 +1,29 @@
+name: PR - grey skipped workflow
+
+on:
+ - pull_request 
+
+jobs:
+  kalle-checksum-verification:
+    runs-on: ubuntu-latest
+    outputs:
+      step-status: ${{ steps.step-status.outputs.status }}
+    steps:
+      - name: Check for failed workflows
+        id: step-status
+        run: |
+          echo "This workflow is intentionally skipped and greyed out. It will not be executed automatically but can be triggered manually."
+          
+
+  notify-on-success:
+    needs: kalle-checksum-verification
+    runs-on: ubuntu-latest
+    if: ${{ needs.kalle-checksum-verification.outputs.step-status == 'success' }}
+    steps:
+      - name: Notify on Success
+        run: |
+          echo "The kalle-checksum-verification step was successful. Notify accordingly."
+          exit 0
+
+
+
