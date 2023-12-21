@@ -1,0 +1,14 @@
+name: Example Workflow
+
+on:
+  workflow_run:
+    workflows: ["ecample_trigger.yml"]
+   
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display message
+        run: echo "The 'ecample' workflow has completed."
