@@ -13,8 +13,7 @@ jobs:
         id: step-status
         run: |
           echo "This workflow is intentionally skipped and greyed out. It will not be executed automatically but can be triggered manually."
-          exit 0
-      
+          
 
   notify-on-success:
     needs: kalle-checksum-verification
