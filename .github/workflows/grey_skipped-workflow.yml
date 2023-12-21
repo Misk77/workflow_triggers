@@ -1,4 +1,4 @@
-name: grey skipped workflow
+name: PR - grey skipped workflow
 
 on:
  - pull_request 
@@ -16,4 +16,5 @@ jobs:
         run: |
           echo "Setting needs_triage to true."
           echo "needs_triage: true" > needs_triage.txt
+          exit 0
  
