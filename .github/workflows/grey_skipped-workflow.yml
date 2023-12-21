@@ -25,30 +25,5 @@ jobs:
           echo "The kalle-checksum-verification step was successful. Notify accordingly."
           exit 0
 
-  notify-on-status:
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: "Plan faild send failure notification"
-        if: ${{ steps.step-status.outputs.status }} != 'success'
-        uses: slacknotity.yml
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-      - name: "Plan success send success notification"
-        if: ${{ steps.step-status.outputs.status }} == 'success'
-        uses: slacknotity.yml
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-  notify-on-failure:
-    needs: kalle-checksum-verification
-    runs-on: ubuntu-latest
-    if: ${{ needs.kalle-checksum-verification.outputs.step-status == 'failure' }}
-    steps:
-      - name: Notify on Failure
-        run: echo "The kalle-checksum-verification step failed. Notify accordingly."
 
 

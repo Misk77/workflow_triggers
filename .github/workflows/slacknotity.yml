@@ -1,54 +1,39 @@
----
-name: Send custom JSON data to Slack workflow
+name: Slack Notification Aggregator
 
 on:
   workflow_run:
-    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml", "skipped_workflow_sim.yml", "greyed_out_workflows.yml", "grey_skipped-workflow.yml"]
+    workflows: ["atg-checksum.yaml", "atg-ops-sop.yaml", "atg-team-debug.yaml", "atgcsum.yaml", "log-alarm-forwarder.yaml", "node-dt-collector.yaml", "ocp-insight.yaml", "secure-forwarder.yaml"]
     types: [completed]
 
 jobs:
-  verify_workflow_started:
-    runs-on: ubuntu-latest
+  check_and_notify:
+    runs-on: ubuntu-22.04
     steps:
-      - name: Check for failed workflows
+      - name: Check individual workflow statuses
         run: |
-          failed_workflows=false
-          skipped_workflows=[]
-          for workflow_run in workflow_runs {
-            if (workflow_run.status != 'success') {
-              failed_workflows=true
-            }
-            else if (workflow_run.status == 'skipped') {
-              skipped_workflows.append(workflow_run.id)
+          for workflow in workflow_runs {
+            if (workflow.conclusion != 'success') {
+              exit 1
             }
           }
 
-          if (!failed_workflows) {
-            echo "All workflows completed successfully (excluding skipped workflows), sending notification to Slack"
-
-            - name: Send custom JSON data to Slack workflow
-              id: slack
-              uses: slackapi/slack-github-action@v1.24.0
-              with:
-                channel-id: C038JK97W1G
-                payload: |
-                  {
-                    "text": "@Michel workflow_triggers PR for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
-                    "blocks": [
-                      {
-                        "type": "section",
-                        "text": {
-                          "type": "mrkdwn",
-                          "text": "@Michel workflow_triggers PR for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
-                        }
-                      }
-                    ]
+      - id: slack
+        name: Send custom JSON data to Slack workflow
+        run: |
+          payload: |
+            {
+              "text": "@ocp-sre for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "@ocp-sre for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
                   }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
-              env:
-                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-                SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          }
-          else {
-            echo "One or more workflows failed (excluding skipped workflows). Not sending notification to Slack"
-          }
