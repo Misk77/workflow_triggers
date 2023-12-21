@@ -2,6 +2,7 @@ name: Example Workflow trigger this
 
 on:
   - pull_request
+  - push
 
 jobs:
   example-job:
