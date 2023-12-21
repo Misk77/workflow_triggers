@@ -6,15 +6,30 @@ on:
 jobs:
   kalle-checksum-verification:
     runs-on: ubuntu-latest
+    outputs:
+      step-status: ${{ steps.step-status.outputs.status }}
     steps:
       - name: Check for failed workflows
+        id: step-status
         run: |
           echo "This workflow is intentionally skipped and greyed out. It will not be executed automatically but can be triggered manually."
           exit 0
+      
 
-      - name: Mark workflow as needs triage
-        run: |
-          echo "Setting needs_triage to true."
-          echo "needs_triage: true" > needs_triage.txt
-          exit 0
- 
+  notify-on-success:
+    needs: kalle-checksum-verification
+    runs-on: ubuntu-latest
+    if: ${{ needs.kalle-checksum-verification.outputs.step-status == 'success' }}
+    steps:
+      - name: Notify on Success
+        run: echo "The kalle-checksum-verification step was successful. Notify accordingly."
+
+  notify-on-failure:
+    needs: kalle-checksum-verification
+    runs-on: ubuntu-latest
+    if: ${{ needs.kalle-checksum-verification.outputs.step-status == 'failure' }}
+    steps:
+      - name: Notify on Failure
+        run: echo "The kalle-checksum-verification step failed. Notify accordingly."
+
+
