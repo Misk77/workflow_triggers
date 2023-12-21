@@ -3,21 +3,26 @@ name: Slack Notification Aggregator
 on:
   # - pull_request
    workflow_run:
-      workflows: ["kalle-checksum.yaml"]
+      workflows: ["ecample_trigger.yml"]
       #workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml", "skipped_workflow_sim.yml", "greyed_out_workflows.yml", "grey_skipped-workflow.yml"]
      
 
 jobs:
   check_and_notify:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      # - name: Check individual workflow statuses
-      #   run: |
-      #     for workflow in workflow_runs {
-      #       if (workflow.conclusion != 'success') {
-      #         exit 1
-      #       }
-      #     }
+      - name: need to get the branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{github.event.workflow_run.head_branch}}
+
+      - name: Check individual workflow statuses
+        run: |
+          for workflow in workflow_runs {
+            if (workflow.conclusion != 'success') {
+              exit 1
+            }
+          }
 
       - name: Send custom JSON data to Slack workflow
         id: slack

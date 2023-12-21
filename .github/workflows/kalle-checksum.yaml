@@ -2,13 +2,11 @@
 name: PR - kalle checksum
 
 on:
-  pull_request:
-    branches:
-    - master
+  - pull_request
  
 jobs:
   kalle-checksum-job:
     name: kalle-checksum Step
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hej, nu startar vi kalle-checksum.yaml"
+      - run: echo "Hej, nu startar vi kalle-checksum.yaml "
