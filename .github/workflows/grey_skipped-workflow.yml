@@ -31,14 +31,14 @@ jobs:
     steps:
       - name: "Plan faild send failure notification"
         if: ${{ steps.step-status.outputs.status }} != 'success'
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: slacknotity.yml
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
       - name: "Plan success send success notification"
         if: ${{ steps.step-status.outputs.status }} == 'success'
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: slacknotity.yml
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
