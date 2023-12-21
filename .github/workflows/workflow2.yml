@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: need to get the branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{github.event.workflow_run.head_branch}}
+
       - name: Triggered by Workflow 1 completion
         run: echo "Workflow 2 triggered by Workflow 1 completion"
 
