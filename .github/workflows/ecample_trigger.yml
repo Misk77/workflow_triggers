@@ -1,0 +1,12 @@
+name: Example Workflow trigger this
+
+on:
+  - pull_request
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display message
+        run: echo "This is example that will trigger the workflow_run"
