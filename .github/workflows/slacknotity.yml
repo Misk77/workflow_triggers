@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check for failed workflows
         run: |
-          for workflow_run in workflow_runs {
+            for workflow_run in workflow_runs {
             if (workflow_run.status != 'success') {
               failed_workflows=true
               break
