@@ -2,7 +2,7 @@
 name: PR - kalle checksum
 
 on:
-  pull_request:
+  - pull_request
  
 jobs:
   kalle-checksum-job:
