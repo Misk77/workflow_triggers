@@ -11,13 +11,18 @@ jobs:
   check_and_notify:
     runs-on: ubuntu-22.04
     steps:
-      # - name: Check individual workflow statuses
-      #   run: |
-      #     for workflow in workflow_runs {
-      #       if (workflow.conclusion != 'success') {
-      #         exit 1
-      #       }
-      #     }
+      - name: need to get the branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{github.event.workflow_run.head_branch}}
+
+      - name: Check individual workflow statuses
+        run: |
+          for workflow in workflow_runs {
+            if (workflow.conclusion != 'success') {
+              exit 1
+            }
+          }
 
       - name: Send custom JSON data to Slack workflow
         id: slack
