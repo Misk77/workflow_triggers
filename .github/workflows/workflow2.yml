@@ -1,0 +1,16 @@
+name: Workflow 2
+
+on:
+  workflow_run:
+    workflows: ["workflow1.yml"]
+ 
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Triggered by Workflow 1 completion
+        run: echo "Workflow 2 triggered by Workflow 1 completion"
+
+      # Add more steps as needed
