@@ -1,5 +1,5 @@
 ---
-name: kalle team debug
+name: PR - kalle team debug
 
 on:
   - pull_request

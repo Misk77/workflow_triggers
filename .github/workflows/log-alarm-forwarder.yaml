@@ -1,5 +1,5 @@
 ---
-name: log alarm forwarder
+name: PR - log alarm forwarder
 
 on:
   - pull_request

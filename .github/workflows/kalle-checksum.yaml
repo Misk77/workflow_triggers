@@ -1,5 +1,5 @@
 ---
-name: kalle checksum
+name: PR - kalle checksum
 
 on:
   - pull_request

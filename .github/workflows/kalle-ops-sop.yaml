@@ -1,5 +1,5 @@
 ---
-name: kalle ops sop
+name: PR - kalle ops sop
 
 on:
   - pull_request

@@ -1,4 +1,4 @@
-name: Skipped workflow Verification
+name: PR - Skipped workflow Verification
 
 on:
   - pull_request
