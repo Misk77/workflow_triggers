@@ -3,8 +3,7 @@ name: Workflow 2
 on:
   workflow_run:
     workflows: ["workflow1.yml"]
-    types:
-      - completed
+ 
 
 jobs:
   job1:
