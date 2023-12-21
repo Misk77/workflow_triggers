@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check for failed workflows
         run: |
-            for workflow_run in workflow_runs {
+          for workflow_run in workflow_runs {
             if (workflow_run.status != 'success') {
               failed_workflows=true
               break
@@ -26,7 +26,6 @@ jobs:
               id: slack
               uses: slackapi/slack-github-action@v1.24.0
               with:
-                channel-id: C038JK97W1G
                 payload: |
                 {
                   "text": "@Michel workflow_triggers PR for Review - GitHub Action build result: <span class="math-inline">\{\{ job\.status \}\}\\n</span>{{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
