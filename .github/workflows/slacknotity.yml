@@ -2,9 +2,7 @@
 name: Send custom JSON data to Slack workflow
 
 on:
-  pull_request:
-    branches:
-      - main
+  - pull_request
 
 jobs:
   verify_workflow_started:
