@@ -5,7 +5,7 @@ on:
 
 jobs:
   kalle-checksum-verification:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check for failed workflows
         run: |

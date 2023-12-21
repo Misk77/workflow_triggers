@@ -2,9 +2,11 @@
 name: Send custom JSON data to Slack workflow
 
 on:
-  workflow_run: 
-    workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml", "skipped_workflow_sim.yml", "greyed_out_workflows.yml", "grey_skipped-workflow.yml"]
-    types: [completed]
+  pull_request:
+
+  # workflow_run: 
+  #   workflows: ["kalle-checksum.yaml", "kalle-ops-sop.yaml", "workflow_01.yml", "log-alarm-forwarder.yaml", "Second_Workflow.yml", "workflow_01.yml", "skipped_workflow_sim.yml", "greyed_out_workflows.yml", "grey_skipped-workflow.yml"]
+  #   types: [completed]
 
 jobs:
   verify_workflow_started:
