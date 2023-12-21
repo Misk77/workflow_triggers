@@ -2,7 +2,9 @@
 name: Send custom JSON data to Slack workflow
 
 on:
-  - pull_request
+  pull_request:
+    branches:
+      - main
 
 jobs:
   verify_workflow_started:
@@ -47,4 +49,3 @@ jobs:
             echo "One or more workflows failed. Not sending notification to Slack"
           }
      
-	 
