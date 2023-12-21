@@ -1,0 +1,17 @@
+name: Workflow 2
+
+on:
+  workflow_run:
+    workflows: ["Workflow 1"]
+    types:
+      - completed
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Triggered by Workflow 1 completion
+        run: echo "Workflow 2 triggered by Workflow 1 completion"
+
+      # Add more steps as needed
