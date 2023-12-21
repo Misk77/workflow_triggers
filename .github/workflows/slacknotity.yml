@@ -24,13 +24,13 @@ jobs:
         run: |
           payload: |
             {
-              "text": "@ocp-sre for Review - GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>",
+              "text": "@Misk for Review - GitHub Action build result: ${{ job.status }}\n *Created by:* <${{ github.event.pull_request.user.login }}>",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "@ocp-sre for Review GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }} \n *Created by:* <${{ github.event.pull_request.user.login }}>"
+                    "text": "@Misk for Review GitHub Action build result: ${{ job.status }}\n *Created by:* <${{ github.event.pull_request.user.login }}>"
                   }
                 }
               ]
